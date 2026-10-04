@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import ListScreen from './screens/ListScreen.jsx'
 import PassageScreen from './screens/PassageScreen.jsx'
+import ContinuousScreen from './screens/ContinuousScreen.jsx'
 import { load, save, KEYS } from './lib/storage.js'
 
 // 화면 상태를 브라우저 history 에 기록 → 휴대폰 뒤로가기가 앱 안에서 이전 화면으로 동작
-// nav = { screen: 'list' } | { screen: 'passage', id }
+// nav = { screen: 'list' } | { screen: 'passage', id } | { screen: 'continuous', stage }
 const LIST = { screen: 'list' }
 
 export default function App() {
@@ -38,6 +39,13 @@ export default function App() {
     else window.history.pushState(next, '')
     setNav(next)
     save(KEYS.pos, id)
+    window.scrollTo(0, 0)
+  }
+
+  const openContinuous = (stage) => {
+    const next = { screen: 'continuous', stage, fromList: true }
+    window.history.pushState(next, '')
+    setNav(next)
     window.scrollTo(0, 0)
   }
 
@@ -79,5 +87,18 @@ export default function App() {
       />
     )
   }
-  return <ListScreen data={data} all={all} done={done} onOpen={openPassage} />
+  const contStage = nav.screen === 'continuous' && data.stages.find(s => s.stage === nav.stage)
+  if (contStage) {
+    return (
+      <ContinuousScreen
+        key={contStage.stage}
+        stage={contStage.stage}
+        passages={contStage.passages}
+        onBack={goList}
+        onOpen={(id) => openPassage(id)}
+      />
+    )
+  }
+
+  return <ListScreen data={data} all={all} done={done} onOpen={openPassage} onContinuous={openContinuous} />
 }

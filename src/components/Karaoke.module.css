@@ -48,6 +48,13 @@
   transform: scale(0.94);
 }
 
+.numStatic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
 .active .num {
   color: var(--primary);
 }

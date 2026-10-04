@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { load, save, KEYS, loadSettings } from '../lib/storage.js'
 import styles from './ListScreen.module.css'
 
-export default function ListScreen({ data, all, done, onOpen }) {
+export default function ListScreen({ data, all, done, onOpen, onContinuous }) {
   const [stage, setStage] = useState(() => {
     const s = loadSettings().stage
     return data.stages.some(x => x.stage === s) ? s : data.stages[0].stage
@@ -68,6 +68,23 @@ export default function ListScreen({ data, all, done, onOpen }) {
             )
           })}
         </div>
+
+        <button className={styles.continuous} onClick={() => onContinuous(stage)}>
+          <span className={styles.contIcon} aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+              <path d="M17 2l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M21 13v2a3 3 0 01-3 3H3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          <span className={styles.contBody}>
+            <span className={styles.contTitle}>{stage}단계 연속듣기</span>
+            <span className={styles.contDesc}>1번부터 {current.passages.length}번까지 차례로, 끝나면 다시 처음부터</span>
+          </span>
+          <svg viewBox="0 0 24 24" fill="none" width="20" height="20" className={styles.chevron} aria-hidden="true">
+            <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+        </button>
 
         <ol className={styles.list}>
           {current.passages.map(p => {

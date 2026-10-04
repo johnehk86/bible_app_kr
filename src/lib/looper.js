@@ -21,6 +21,7 @@ export class Looper {
     this.listeners = new Set()
     this.raf = 0
     this.gapTimer = 0
+    this.onDone = null // 정한 횟수를 다 들었을 때 (연속듣기에서 다음 구절로 넘어갈 때 씀)
 
     this.onTime = () => this.check()
     this.onEnded = () => this.reachedEnd()
@@ -182,6 +183,7 @@ export class Looper {
     this.count += 1
     if (this.repeat > 0 && this.count >= this.repeat) {
       this.stop()
+      this.onDone?.()
       return
     }
     if (this.gap > 0) {

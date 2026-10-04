@@ -1,0 +1,85 @@
+.counter {
+  min-width: 44px;
+  text-align: right;
+  padding-right: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.openLink {
+  margin-top: 4px;
+  min-height: 32px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-dim);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.empty {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--outline);
+}
+
+/* ── 재생 순서 ── */
+.queue {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0 -8px;
+}
+
+.qItem {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  text-align: left;
+  color: var(--on-surface-variant);
+  transition: background 0.2s;
+}
+
+.qItem:hover {
+  background: var(--gild-soft);
+}
+
+.qNo {
+  width: 24px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--outline);
+  font-variant-numeric: tabular-nums;
+}
+
+.qRef {
+  flex: 1;
+  font-family: var(--font-serif);
+  font-size: 15px;
+}
+
+.qCurrent {
+  background: var(--gild-soft);
+  box-shadow: inset 2px 0 0 var(--primary-container);
+}
+
+.qCurrent .qNo,
+.qCurrent .qRef {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.qNow {
+  color: var(--primary);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: 0.3; }
+}

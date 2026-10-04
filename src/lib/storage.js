@@ -25,6 +25,8 @@ export const KEYS = {
   ab: (id) => `ab:${id}`, //       { start, end } 반복 구간
   marks: (id) => `verseMarks:${id}`, // [0, 7.2, 15.9, ...] 직접 맞춘 절 시작 시각
   mask: (id) => `mask:${id}`, //   단어 가리기 단계 (0~3)
+  cont: 'continuous', //           연속듣기 설정 { each, gap, rate }
+  contPos: (stage) => `continuousPos:${stage}`, // 연속듣기에서 마지막으로 듣던 구절 id
 }
 
 export const DEFAULT_SETTINGS = { repeat: 0, gap: 1, rate: 1, stage: 1 }

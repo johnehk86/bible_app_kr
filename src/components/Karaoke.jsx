@@ -12,6 +12,7 @@ import styles from './Karaoke.module.css'
 const LEAD = 0.04 // 소리보다 아주 살짝 먼저 칠해야 눈에는 딱 맞게 보임
 
 function Karaoke({ verses, words, times, looper, range, masked, onWordTap, onVerseTap }) {
+  // onVerseTap 이 없으면 절 번호는 누를 수 없는 그냥 숫자 (연속듣기 화면)
   const rootRef = useRef(null)
   const spansRef = useRef([])
   const versesRef = useRef([])
@@ -110,15 +111,19 @@ function Karaoke({ verses, words, times, looper, range, masked, onWordTap, onVer
         }
         return (
           <p key={v.n} className={styles.verse} ref={el => (versesRef.current[vi] = el)}>
-            <button
-              type="button"
-              className={styles.num}
-              onClick={(e) => { e.stopPropagation(); onVerseTap?.(vi) }}
-              aria-label={`${v.n}절만 반복`}
-              disabled={!times}
-            >
-              {v.n}
-            </button>
+            {onVerseTap ? (
+              <button
+                type="button"
+                className={styles.num}
+                onClick={(e) => { e.stopPropagation(); onVerseTap(vi) }}
+                aria-label={`${v.n}절만 반복`}
+                disabled={!times}
+              >
+                {v.n}
+              </button>
+            ) : (
+              <span className={`${styles.num} ${styles.numStatic}`}>{v.n}</span>
+            )}
             {items}
           </p>
         )
