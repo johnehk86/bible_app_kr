@@ -26,7 +26,9 @@ export class Looper {
     this.onEnded = () => this.reachedEnd()
     this.onMeta = () => this.emit()
     this.onPause = () => {
-      // 다른 앱/잠금화면/이어폰 버튼으로 멈췄을 때 상태 맞추기
+      // 다른 앱/잠금화면/이어폰 버튼으로 멈췄을 때 상태 맞추기.
+      // 파일 끝에 닿으면 브라우저가 'ended' 직전에 'pause'를 보내는데, 이건 반복 처리(onEnded)에 맡긴다.
+      if (this.audio.ended) return
       if (this.mode === 'playing') { this.mode = 'paused'; this.stopTicker(); this.emit() }
     }
     this.onPlay = () => {
@@ -170,7 +172,9 @@ export class Looper {
   check() {
     if (this.mode !== 'playing') return
     const t = this.time
-    if (this.range && t >= this.range.end - END_EPS && t < this.range.end + 1.0) this.reachedEnd()
+    // 구간이 없으면 끝점 = 파일 끝. 파일이 실제로 끝나기 직전에 되돌려야 끊김이 없다
+    const end = this.end
+    if (end > 0 && t >= end - END_EPS && t < end + 1.0) this.reachedEnd()
   }
 
   reachedEnd() {
