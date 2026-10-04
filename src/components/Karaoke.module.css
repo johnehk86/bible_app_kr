@@ -1,0 +1,97 @@
+.text {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── 절 ── */
+.verse {
+  position: relative;
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 1.95;
+  letter-spacing: 0.01em;
+  word-break: keep-all;
+  padding: 8px 10px 8px 40px;
+  margin: 0 -10px;
+  border-radius: 12px;
+  color: var(--unread);
+  transition: background 0.35s ease, box-shadow 0.35s ease;
+}
+
+.active {
+  background: linear-gradient(to right, var(--gild-soft), transparent);
+  box-shadow: inset 2px 0 0 var(--primary-container);
+}
+
+/* 절 번호 = "이 절만 반복" 버튼 (터치 영역 넉넉히) */
+.num {
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  width: 34px;
+  height: 36px;
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-dim);
+  font-variant-numeric: tabular-nums;
+  transition: background 0.2s, color 0.2s;
+}
+
+.num:hover:not(:disabled) {
+  background: var(--gild-soft);
+  color: var(--primary);
+}
+
+.num:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.active .num {
+  color: var(--primary);
+}
+
+/* ── 어절 ── */
+.w {
+  cursor: pointer;
+  border-radius: 4px;
+  transition: color 0.25s ease, opacity 0.3s ease, text-shadow 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.w:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--gild-active);
+  text-underline-offset: 6px;
+}
+
+/* 반복 구간 밖 */
+.o {
+  opacity: 0.38;
+}
+
+/* 이미 읽은 어절 */
+.r {
+  color: var(--read);
+  text-shadow: 0 0 16px var(--gild);
+}
+
+/* 지금 읽는 어절: 왼쪽부터 --p 만큼 칠함 */
+.c {
+  --p: 0%;
+  color: transparent;
+  background-image: linear-gradient(90deg, var(--read) var(--p), var(--unread) var(--p));
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: none;
+}
+
+/* 가린 어절: 글자 대신 밑줄 칸. 읽는 순간 드러난다 */
+.m:not(.r):not(.c) {
+  color: transparent;
+  background: var(--mask);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  text-shadow: none;
+}

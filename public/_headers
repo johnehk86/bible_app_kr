@@ -1,0 +1,8 @@
+# Cloudflare Pages / Netlify 헤더 설정 — 서비스 워커·매니페스트·본문 데이터는 항상 최신본 확인
+/sw.js
+  Cache-Control: no-cache
+/manifest.webmanifest
+  Cache-Control: no-cache
+  Content-Type: application/manifest+json
+/data/*
+  Cache-Control: no-cache

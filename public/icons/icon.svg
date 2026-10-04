@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="28%" r="75%">
+      <stop offset="0" stop-color="#3b3322"/>
+      <stop offset="0.55" stop-color="#1a1b21"/>
+      <stop offset="1" stop-color="#111319"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe09d"/>
+      <stop offset="1" stop-color="#d4ad5c"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- sparkle -->
+  <path d="M256 88 L267 117 L296 128 L267 139 L256 168 L245 139 L216 128 L245 117 Z" fill="url(#gold)"/>
+  <!-- open book -->
+  <g fill="rgba(255,224,157,0.08)" stroke="url(#gold)" stroke-width="14" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M256 214 C222 190 180 180 136 180 L136 358 C180 358 222 368 256 392 Z"/>
+    <path d="M256 214 C290 190 332 180 376 180 L376 358 C332 358 290 368 256 392 Z"/>
+  </g>
+  <g stroke="#ffe09d" stroke-opacity="0.45" stroke-width="7" stroke-linecap="round" fill="none">
+    <path d="M166 232 C192 234 214 241 232 252"/>
+    <path d="M166 272 C192 274 214 281 232 292"/>
+    <path d="M166 312 C192 314 214 321 232 332"/>
+    <path d="M346 232 C320 234 298 241 280 252"/>
+    <path d="M346 272 C320 274 298 281 280 292"/>
+    <path d="M346 312 C320 314 298 321 280 332"/>
+  </g>
+</svg>

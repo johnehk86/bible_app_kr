@@ -1,0 +1,170 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Sanctuary 디자인 토큰 (어두운 테마: 딥 차콜 + 샴페인 골드) ── */
+:root {
+  color-scheme: dark;
+
+  --surface: #111319;
+  --surface-lowest: #0c0e14;
+  --surface-low: #191b22;
+  --surface-container: #1e1f26;
+  --surface-high: #282a30;
+  --surface-highest: #33343b;
+
+  --primary: #ffe09d;
+  --primary-container: #e5c378;
+  --primary-dim: #e4c277;
+  --on-primary: #3f2e00;
+
+  --on-surface: #e2e2eb;
+  --on-surface-variant: #d0c5b4;
+  --outline: #999080;
+  --outline-variant: #4d4639;
+
+  --gild: rgba(229, 195, 120, 0.22);
+  --gild-active: rgba(229, 195, 120, 0.45);
+  --gild-soft: rgba(229, 195, 120, 0.10);
+  --glow: 0 0 35px -5px rgba(229, 195, 120, 0.15), inset 0 0 15px rgba(229, 195, 120, 0.05);
+
+  /* 반투명 막 (상단바, 카드, 플레이어) */
+  --bar-bg: rgba(17, 19, 25, 0.8);
+  --card-bg: rgba(30, 31, 38, 0.6);
+  --player-bg: linear-gradient(to bottom, rgba(40, 42, 48, 0.94), rgba(25, 27, 34, 0.97));
+  --zenith: radial-gradient(ellipse at 50% 0%, rgba(255, 224, 157, 0.12) 0%, rgba(229, 195, 120, 0.04) 45%, transparent 75%);
+  --shadow-strong: 0 -8px 40px rgba(0, 0, 0, 0.45);
+
+  /* 말씀 따라 색칠 (가라오케) */
+  --read: #ffe09d;            /* 읽은 글자 */
+  --unread: #e2e2eb;          /* 아직 안 읽은 글자 */
+  --dimmed: rgba(226, 226, 235, 0.32); /* 반복 구간 밖 */
+  --loop-bg: rgba(255, 224, 157, 0.07);
+  --mask: rgba(229, 195, 120, 0.22);
+
+  --danger: #ffb4a8;
+
+  --font-serif: 'Noto Serif KR', 'Noto Serif', serif;
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans KR', system-ui, sans-serif;
+
+  --radius: 16px;
+  --radius-sm: 12px;
+  --gutter: 20px;
+}
+
+/* ── 밝은 테마 (시스템 설정을 따름): 한지 + 짙은 금 ── */
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+
+    --surface: #f6f1e7;
+    --surface-lowest: #fffdf8;
+    --surface-low: #f0e9db;
+    --surface-container: #fbf7ef;
+    --surface-high: #ece4d3;
+    --surface-highest: #e2d8c3;
+
+    --primary: #8a6113;
+    --primary-container: #c99a3c;
+    --primary-dim: #a77a24;
+    --on-primary: #2b1d00;
+
+    --on-surface: #26221b;
+    --on-surface-variant: #5b5244;
+    --outline: #857a66;
+    --outline-variant: #d5c9b1;
+
+    --gild: rgba(167, 122, 36, 0.24);
+    --gild-active: rgba(167, 122, 36, 0.5);
+    --gild-soft: rgba(167, 122, 36, 0.08);
+    --glow: 0 6px 30px -10px rgba(138, 97, 19, 0.25);
+
+    --bar-bg: rgba(246, 241, 231, 0.85);
+    --card-bg: rgba(255, 253, 248, 0.75);
+    --player-bg: linear-gradient(to bottom, rgba(255, 253, 248, 0.96), rgba(250, 245, 235, 0.98));
+    --zenith: radial-gradient(ellipse at 50% 0%, rgba(201, 154, 60, 0.18) 0%, rgba(201, 154, 60, 0.05) 45%, transparent 75%);
+    --shadow-strong: 0 -8px 36px rgba(80, 60, 20, 0.14);
+
+    --read: #9a6a00;
+    --unread: #26221b;
+    --dimmed: rgba(38, 34, 27, 0.35);
+    --loop-bg: rgba(201, 154, 60, 0.12);
+    --mask: rgba(167, 122, 36, 0.2);
+
+    --danger: #b3261e;
+  }
+}
+
+html, body {
+  min-height: 100%;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+::selection {
+  background: var(--primary-container);
+  color: var(--on-primary);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+button:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--primary-container);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* 화면 상단의 금빛 광원 */
+.zenith {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 560px;
+  height: 360px;
+  background: var(--zenith);
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

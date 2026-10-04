@@ -1,0 +1,23 @@
+{
+  "name": "malsseum-app",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "wav2mp3": "node scripts/wav2mp3.mjs",
+    "check-align": "node scripts/check-align.mjs"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.2",
+    "@breezystack/lamejs": "^1.2.7",
+    "mpg123-decoder": "^1.0.0"
+  }
+}

@@ -1,0 +1,228 @@
+.player {
+  position: relative;
+  overflow: visible;
+  background: var(--player-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--gild-active);
+  border-radius: 22px;
+  padding: 10px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: var(--shadow-strong), var(--glow);
+}
+
+/* ── 진행바 ── */
+.bar {
+  cursor: pointer;
+  padding: 18px 0 14px;
+  touch-action: none;
+  border-radius: 8px;
+}
+
+.track {
+  position: relative;
+  height: 6px;
+  background: var(--surface-highest);
+  border-radius: 999px;
+}
+
+.tick {
+  position: absolute;
+  top: -3px;
+  width: 1px;
+  height: 12px;
+  background: var(--outline);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* 반복 구간 */
+.loop {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  border-radius: 6px;
+  background: var(--gild-soft);
+  border: 1px solid var(--gild-active);
+  pointer-events: none;
+}
+
+.fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(to right, var(--primary-container), var(--primary));
+  border-radius: 999px;
+  box-shadow: 0 0 8px var(--gild-active);
+  pointer-events: none;
+}
+
+.thumb {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--gild), 0 0 12px var(--gild-active);
+  pointer-events: none;
+}
+
+/* 구간 손잡이 (A / B) — 진행바 위로 튀어나온 작은 깃발 */
+.handle {
+  position: absolute;
+  bottom: 9px;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 22px;
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--on-primary);
+  background: var(--primary-container);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  touch-action: none;
+  z-index: 2;
+}
+
+/* 손가락으로 잡기 쉽게 보이지 않는 터치 영역을 넓힘 */
+.handle::before {
+  content: '';
+  position: absolute;
+  inset: -10px -8px -14px;
+}
+
+.handle::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 2px;
+  height: 14px;
+  transform: translateX(-50%);
+  background: var(--primary-container);
+}
+
+/* ── 시간 ── */
+.timeRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--outline);
+  font-variant-numeric: tabular-nums;
+}
+
+.status {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-dim);
+  text-align: center;
+}
+
+/* ── 버튼 ── */
+.controls {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.markBtn {
+  min-height: 48px;
+  padding: 0 10px;
+  border-radius: 14px;
+  border: 1px solid var(--gild);
+  background: var(--surface-lowest);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: transform 0.12s, background 0.2s, border-color 0.2s;
+}
+
+.markBtn:active:not(:disabled) {
+  transform: scale(0.95);
+  background: var(--gild-soft);
+  border-color: var(--gild-active);
+}
+
+.markIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--on-primary);
+  background: var(--primary-container);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stopBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--gild);
+  background: var(--surface-lowest);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s, opacity 0.2s;
+}
+
+.stopBtn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.playBtn {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 55%, var(--primary-dim) 100%);
+  color: var(--on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 6px 22px rgba(229, 195, 120, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.playBtn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.player button:disabled {
+  opacity: 0.35;
+}
+
+@media (max-width: 360px) {
+  .markBtn {
+    font-size: 12px;
+    padding: 0 6px;
+  }
+  .markIcon {
+    display: none;
+  }
+}
